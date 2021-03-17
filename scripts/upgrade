@@ -102,11 +102,11 @@ if ynh_compare_current_package_version --comparison lt --version 0.9.8.1~ynh1; t
     else
       ynh_replace_string --match_string="//const WWW_URI = '/asso/';" --replace_string="const WWW_URI = '$path_url/';" --target_file="$final_path/config.local.php"
     fi
+  ynh_add_fpm_config --package="$extra_php_dependencies"
   ynh_systemd_action --service_name=nginx --action=reload
-  php "$final_path/www/admin/login.php"
-fi
-
-if [ "$upgrade_type" == "UPGRADE_APP" ]; then
+  ynh_local_curl "/www/admin/login.php"
+  ynh_setup_source --dest_dir="$final_path" --source_id="app"
+  elif [ "$upgrade_type" == "UPGRADE_APP" ]; then
 	# Download, check integrity, uncompress and patch the source from app.src
 	ynh_setup_source --dest_dir="$final_path" --source_id="app"
 fi
