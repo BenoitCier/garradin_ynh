@@ -104,7 +104,6 @@ if ynh_compare_current_package_version --comparison lt --version 0.9.8.1~ynh1; t
     fi
   ynh_systemd_action --service_name=nginx --action=reload
   php "/www/admin/upgrade.php"
-  ynh_setup_source --dest_dir="$final_path" --source_id="app"
 fi
 
 if [ "$upgrade_type" == "UPGRADE_APP" ]; then
