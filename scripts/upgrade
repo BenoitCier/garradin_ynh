@@ -104,7 +104,7 @@ if ynh_compare_current_package_version --comparison lt --version 0.9.8.1~ynh1; t
     fi
   ynh_add_fpm_config --package="$extra_php_dependencies"
   ynh_systemd_action --service_name=nginx --action=reload
-  ynh_local_curl "/www/admin/login.php"
+  ynh_local_curl "/www/admin/index.php"
   ynh_setup_source --dest_dir="$final_path" --source_id="app"
 fi
 
