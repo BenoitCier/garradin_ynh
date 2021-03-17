@@ -97,6 +97,14 @@ ynh_script_progression --message="Upgrading source files..." --weight=5
 
 if ynh_compare_current_package_version --comparison lt --version 0.9.8.1~ynh1; then
   ynh_setup_source --dest_dir="$final_path" --source_id="0.9.8"
+    if [ "$path_url" == "/" ]; then
+      ynh_replace_string --match_string="//const WWW_URI = '/asso/';" --replace_string="const WWW_URI = '$path_url';" --target_file="$final_path/config.local.php"
+    else
+      ynh_replace_string --match_string="//const WWW_URI = '/asso/';" --replace_string="const WWW_URI = '$path_url/';" --target_file="$final_path/config.local.php"
+    fi
+  ynh_add_fpm_config --package="$extra_php_dependencies"
+  chown $app:$app $final_path -R
+  chmod 755 $final_path -R
   ynh_local_curl "/www/admin/index.php"
 fi
 
