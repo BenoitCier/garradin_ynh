@@ -107,10 +107,9 @@ if [ "$upgrade_type" == "UPGRADE_APP" ] && [ $old_app -eq 1 ]; then
     else
       ynh_replace_string --match_string="//const WWW_URI = '/asso/';" --replace_string="const WWW_URI = '$path_url/';" --target_file="$final_path/config.local.php"
     fi
-  ynh_add_fpm_config --package="$extra_php_dependencies"
-  phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
   ynh_add_nginx_config
   ynh_systemd_action --service_name=nginx --action=reload
+  ynh_add_fpm_config --package="$extra_php_dependencies"
   ynh_local_curl "/www/admin/index.php"
   ynh_setup_source --dest_dir="$final_path" --source_id="app"
 fi
@@ -143,7 +142,7 @@ ynh_script_progression --message="Upgrading PHP-FPM configuration..." --weight=2
 
 # Create a dedicated PHP-FPM config
 ynh_add_fpm_config --package="$extra_php_dependencies"
-
+phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 #=======================================================
 # backup bdd, squelettes directory and config.local.php
 #=======================================================
