@@ -26,10 +26,9 @@ phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 #=================================================
 
 
-if ynh_compare_current_package_version --comparison lt --version 0.9.8.1~ynh1; then
+if ynh_compare_current_package_version --comparison lt --version 0.9.8.1~ynh4; then
     ynh_setup_source --dest_dir="$final_path" --source_id="0.9.8"
     ynh_local_curl "/www/admin/index.php"
-    ynh_setup_source --dest_dir="$final_path" --source_id="app"
 fi
 
 upgrade_type=$(ynh_check_app_version_changed)
