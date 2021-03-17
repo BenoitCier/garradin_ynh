@@ -4,7 +4,7 @@
 # COMMON VARIABLES
 #=================================================
 # dependencies used by the app
-YNH_PHP_VERSION="7.3"
+YNH_PHP_VERSION="7.0"
 
 extra_php_dependencies="php${YNH_PHP_VERSION}-sqlite3"
 
