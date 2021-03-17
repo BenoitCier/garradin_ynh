@@ -111,7 +111,7 @@ if [ "$upgrade_type" == "UPGRADE_APP" ] && [ $old_app -eq 1 ]; then
   ynh_add_fpm_config --package="$extra_php_dependencies"
   ynh_add_nginx_config
   ynh_systemd_action --service_name=nginx --action=reload
-  ynh_local_curl "/www/admin/index.php"
+ # ynh_local_curl "/www/admin/index.php"
   ynh_setup_source --dest_dir="$final_path" --source_id="app"
 fi
 
