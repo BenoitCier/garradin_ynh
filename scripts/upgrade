@@ -81,6 +81,7 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
   # Download, check integrity, uncompress and patch the source from app.src
   ynh_setup_source --dest_dir="$final_path"
+  ynh_local_curl "admin/upgrade.php"
 fi
 
 #=================================================
